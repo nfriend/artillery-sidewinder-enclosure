@@ -1,3 +1,5 @@
+use <third_party/roundedcube.scad>
+
 $fa = 1;
 $fs = 0.4;
 
@@ -28,7 +30,7 @@ cone_large_r = (leg_width / 2) - (2.5 * 2);
 cone_height = bottom_leg_attachment_total_height - bottom_leg_attachment_anchor_height - 5.0;
 
 difference() {
-  cube([leg_width, leg_width, bottom_leg_attachment_clip_height], center=true);
+  roundedcube([leg_width, leg_width, bottom_leg_attachment_clip_height], center=true, radius=1, apply_to="z");
 
   cone_z_translation = (cone_height / 2) - (bottom_leg_attachment_clip_height / 2) + (bottom_leg_attachment_clip_height - cone_height) + epsilon;
 
