@@ -1,5 +1,3 @@
-use <third_party/roundedcube.scad>
-
 $fa = 1;
 $fs = 0.4;
 
@@ -10,7 +8,7 @@ epsilon = 0.001;
 leg_width = 38.1;
 
 // The radius for screw holes.
-screw_hole_radius = 1.0;
+screw_hole_radius = 3.0;
 
 // The height of all bottom leg attachments, when
 // stacked in their final arrangement
@@ -26,11 +24,41 @@ bottom_leg_attachment_clip_height = bottom_leg_attachment_total_height - bottom_
 // The dimensions of the conical protrusion that
 // attach to the base
 cone_small_r = 8;
-cone_large_r = (leg_width / 2) - (2.5 * 2);
+cone_large_r = (leg_width / 2) - (3 * 2);
 cone_height = bottom_leg_attachment_total_height - bottom_leg_attachment_anchor_height - 5.0;
 
+// The primary corner radius
+corner_radius = 1;
+
+// The center point of each of the 3 standard rounded corners
+corner_offset = leg_width / 2 - corner_radius;
+
+// The radius of the cylinder carved out to fit the hinge
+hinge_enclosure_radius = 8;
+
+// The outer radius of the hinge itself
+hinge_outer_radius = 7.5;
+
+// The radius of the hinge hole (that slides onto the hingle pole)
+hinge_hole_inner_radius = 4.5;
+
+// The radius of the hinge pole
+hinge_pole_inner_radius = 4.0;
+
 difference() {
-  roundedcube([leg_width, leg_width, bottom_leg_attachment_clip_height], center=true, radius=1, apply_to="z");
+  // Create a cube with rounded corners. One corner is more rounded than the others
+  hull() {
+
+    // Create the corner with the hinge
+    translate(v = [corner_offset - (hinge_pole_inner_radius - corner_radius), corner_offset - (hinge_pole_inner_radius - corner_radius), 0]) {
+      cylinder(r=hinge_pole_inner_radius, h=bottom_leg_attachment_clip_height, center=true);
+    }
+
+    // Create the other 3 corners
+    translate(v = [-corner_offset, corner_offset, 0])  cylinder(r=1, h=bottom_leg_attachment_clip_height, center=true);
+    translate(v = [-corner_offset, -corner_offset, 0]) cylinder(r=1, h=bottom_leg_attachment_clip_height, center=true);
+    translate(v = [corner_offset, -corner_offset, 0])  cylinder(r=1, h=bottom_leg_attachment_clip_height, center=true);
+  }
 
   cone_z_translation = (cone_height / 2) - (bottom_leg_attachment_clip_height / 2) + (bottom_leg_attachment_clip_height - cone_height) + epsilon;
 
@@ -48,4 +76,14 @@ difference() {
   translate(v = [0, 0, cone_z_translation - 2.0]) {
     cylinder(h=cone_height, r=(cone_small_r + screw_hole_radius) / 2, center=true);
   }
+
+  // Cut a cylinder for the hinge
+  translate(v = [corner_offset - (hinge_pole_inner_radius - corner_radius), corner_offset - (hinge_pole_inner_radius - corner_radius), -5]) {
+    cylinder(r=hinge_enclosure_radius + epsilon, h=bottom_leg_attachment_clip_height + epsilon, center=true);
+  }
+}
+
+// Create the hinge pole
+translate(v = [corner_offset - (hinge_pole_inner_radius - corner_radius), corner_offset - (hinge_pole_inner_radius - corner_radius), -epsilon]) {
+  cylinder(r=hinge_pole_inner_radius, h=bottom_leg_attachment_clip_height, center=true);
 }
