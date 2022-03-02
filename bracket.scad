@@ -45,6 +45,16 @@ hinge_hole_inner_radius = 4.5;
 // The radius of the hinge pole
 hinge_pole_inner_radius = 4.0;
 
+// Creates a cone with a spherical top
+module rounded_cone(sphere_radius, end_radius, height) {
+  hull() {
+    sphere(r = sphere_radius);
+    translate(v = [0, 0, -height / 2]) {
+      cylinder(h=0.001, r=end_radius, center=true);
+    }
+  }
+}
+
 difference() {
   // Create a cube with rounded corners. One corner is more rounded than the others
   hull() {
@@ -65,7 +75,7 @@ difference() {
   // Cut out the cone shape
   translate(v = [0, 0, cone_z_translation]) {
     rotate(a = [0,180,0]) {
-      cylinder(h=cone_height, r1=cone_large_r, r2=cone_small_r, center=true);
+      rounded_cone(sphere_radius=cone_small_r, end_radius=cone_large_r, height=cone_height);
     }
   }
 
