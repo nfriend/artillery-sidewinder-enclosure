@@ -44,3 +44,13 @@ hinge_hole_inner_radius = 4.5;
 
 // The radius of the hinge pole
 hinge_pole_inner_radius = 4.0;
+
+// The width of the fiberglass panels
+fiberglass_width = 3.0;
+
+// The width of the material on either side of the fiberglass panel
+// that holds the panels in place
+fiberglass_holder_width = 2.0;
+
+// The total width of the fiberglass panel holders
+fiberglass_holder_total_width = fiberglass_width + fiberglass_holder_width * 2;
