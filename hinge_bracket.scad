@@ -56,14 +56,22 @@ module hinge_bracket() {
 
   // Creates the triangle shape that holds the fiberglass panels
   module holder_triangle(width) {
-    linear_extrude(height = width, center = true) {
-      polygon(points = [
-        [0, 0],
-        [0, fiberglass_holder_width],
-        [bottom_leg_attachment_clip_height  - fiberglass_holder_width, bottom_leg_attachment_clip_height],
-        [bottom_leg_attachment_clip_height, bottom_leg_attachment_clip_height],
-        [bottom_leg_attachment_clip_height, 0],
-      ]);
+    hull() {
+      translate(v=[bottom_leg_attachment_clip_height / 2, corner_radius / 2, 0]) {
+        cube(size = [bottom_leg_attachment_clip_height, corner_radius, width], center=true);
+      }
+
+      translate(v=[corner_radius, fiberglass_holder_width + corner_radius, 0]) {
+        cylinder(h=width, r=corner_radius, center=true);
+      }
+
+      translate(v=[bottom_leg_attachment_clip_height - corner_radius - fiberglass_holder_width, bottom_leg_attachment_clip_height, 0]) {
+        cylinder(h=width, r=corner_radius, center=true);
+      }
+
+      translate(v=[bottom_leg_attachment_clip_height, bottom_leg_attachment_clip_height + corner_radius / 2, 0]) {
+        cube(size = [corner_radius, corner_radius, width], center=true);
+      }
     }
   }
 
