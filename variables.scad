@@ -10,6 +10,9 @@ leg_width = 38.1;
 // The radius for screw holes.
 screw_hole_radius = 3.0;
 
+// The depth of the cutout that makes space for the screw head
+screw_head_clearance_depth = 2.0;
+
 // The height of all bottom leg attachments, when
 // stacked in their final arrangement
 bottom_leg_attachment_total_height = 25.4;
@@ -26,6 +29,9 @@ bottom_leg_attachment_clip_height = bottom_leg_attachment_total_height - bottom_
 cone_small_r = 8;
 cone_large_r = (leg_width / 2) - (3 * 2);
 cone_height = bottom_leg_attachment_total_height - bottom_leg_attachment_anchor_height - 5.0;
+
+// The radius of the cutout that makes space for the screw head
+screw_head_clearance_radius = (cone_small_r + screw_hole_radius) / 2;
 
 // The primary corner radius
 corner_radius = 1;

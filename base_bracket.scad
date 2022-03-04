@@ -28,7 +28,7 @@ module base_bracket(include_hinge_corner=false) {
     // Cut out the cone shape
     translate(v = [0, 0, cone_z_translation]) {
       rotate(a = [0,180,0]) {
-        rounded_cone(sphere_radius=cone_small_r, end_radius=cone_large_r, height=cone_height);
+        rounded_cone(sphere_radius=cone_small_r, end_radius=cone_large_r, height=cone_height + epsilon);
       }
     }
 
@@ -36,8 +36,8 @@ module base_bracket(include_hinge_corner=false) {
     cylinder(h=bottom_leg_attachment_total_height * 2, r=screw_hole_radius, center=true);
 
     // Cut out clearance for the screw head
-    translate(v = [0, 0, cone_z_translation - 2.0]) {
-      cylinder(h=cone_height, r=(cone_small_r + screw_hole_radius) / 2, center=true);
+    translate(v = [0, 0, cone_z_translation - screw_head_clearance_depth]) {
+      cylinder(h=cone_height, r=screw_head_clearance_radius, center=true);
     }
   }
 }
