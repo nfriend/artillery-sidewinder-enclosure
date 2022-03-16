@@ -3,6 +3,7 @@ use <hinge_bracket.scad>
 use <regular_bracket.scad>
 use <regular_bracket_anchor.scad>
 use <hinge_bracket_anchor.scad>
+use <hinge.scad>
 
 translate(v=[0, 0, -bottom_leg_attachment_anchor_height / 2]) {
   translate(v=[-45, -20, 0]) {
@@ -45,5 +46,9 @@ translate(v=[0, 0, -bottom_leg_attachment_clip_height / 2]) {
     mirror(v= [1, 0, 0]) {
       hinge_bracket();
     }
+  }
+
+  translate(v=[-8, -35, 0]) {
+    hinge();
   }
 }

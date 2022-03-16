@@ -51,6 +51,9 @@ hinge_hole_inner_radius = 4.5;
 // The radius of the hinge pole
 hinge_pole_inner_radius = 4.0;
 
+// The length of the hinge
+hinge_length = 50.0;
+
 // The width of the fiberglass panels
 fiberglass_width = 3.0;
 
