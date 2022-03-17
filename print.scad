@@ -48,7 +48,15 @@ translate(v=[0, 0, -bottom_leg_attachment_clip_height / 2]) {
     }
   }
 
-  translate(v=[-8, -85, 0]) {
-    hinge();
+  translate(v=[0, -85, 0]) {
+    rotate(a=[0, 180, 0]) {
+      hinge();
+    }
+  }
+
+  translate(v=[-15, -30, 0]) {
+    rotate(a=[0, 180, 180]) {
+      hinge();
+    }
   }
 }
