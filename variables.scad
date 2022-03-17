@@ -63,3 +63,6 @@ fiberglass_holder_width = 2.0;
 
 // The total width of the fiberglass panel holders
 fiberglass_holder_total_width = fiberglass_width + fiberglass_holder_width * 2;
+
+// The amount of material underneath the base of the hinge pole
+hinge_pole_base_thickness = 5;

@@ -9,7 +9,7 @@ module hinge_bracket() {
     base_bracket(include_hinge_corner=true);
 
     // Cut a cylinder for the hinge
-    translate(v = [corner_offset - (hinge_pole_inner_radius - corner_radius), corner_offset - (hinge_pole_inner_radius - corner_radius), -5]) {
+    translate(v = [corner_offset - (hinge_pole_inner_radius - corner_radius), corner_offset - (hinge_pole_inner_radius - corner_radius), -hinge_pole_base_thickness]) {
       cylinder(r=hinge_enclosure_radius + epsilon, h=bottom_leg_attachment_clip_height + epsilon, center=true);
     }
   }

@@ -48,7 +48,7 @@ translate(v=[0, 0, -bottom_leg_attachment_clip_height / 2]) {
     }
   }
 
-  translate(v=[-8, -35, 0]) {
+  translate(v=[-8, -85, 0]) {
     hinge();
   }
 }
