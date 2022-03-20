@@ -10,15 +10,33 @@ module hinge_bracket() {
 
   module wood_bracket() {
     module wood_bracket_side() {
-      cube(size=[leg_width * 3 - fiberglass_holder_total_width, leg_width - fiberglass_holder_total_width + wood_bracket_width, wood_bracket_width]);
+      bracket_radius = 5;
+
+      linear_extrude(height=wood_bracket_width, convexity=10) {
+        hull() {
+          translate([leg_width * 3 - fiberglass_holder_total_width, bracket_radius]) {
+            circle(r=bracket_radius);
+          }
+
+          square(size=[bracket_radius, bracket_radius]);
+
+          translate([0, leg_width - fiberglass_holder_total_width]) {
+            square(size=[bracket_radius, bracket_radius]);
+          }
+
+          translate([leg_width * 3 - fiberglass_holder_total_width, leg_width - fiberglass_holder_total_width]) {
+            square(size=[bracket_radius, bracket_radius]);
+          }
+        }
+      }
     }
 
     translate(v=[0, fiberglass_holder_total_width, 0]) {
       wood_bracket_side();
     }
 
-    translate(v=[0, wood_bracket_width + leg_width, 0]) {
-      rotate(a=[90, 0, 0]) {
+    translate(v=[0, leg_width, leg_width - (fiberglass_holder_total_width - wood_bracket_width)]) {
+      rotate(a=[270, 0, 0]) {
         wood_bracket_side();
       }
     }
