@@ -12,21 +12,27 @@ module hinge_bracket() {
     module wood_bracket_side() {
       bracket_radius = 5;
 
-      linear_extrude(height=wood_bracket_width, convexity=10) {
-        hull() {
-          translate([leg_width * 3 - fiberglass_holder_total_width, bracket_radius]) {
-            circle(r=bracket_radius);
-          }
+      difference() {
+        linear_extrude(height=wood_bracket_width, convexity=10) {
+          hull() {
+            translate([leg_width * 3 - fiberglass_holder_total_width, bracket_radius]) {
+              circle(r=bracket_radius);
+            }
 
-          square(size=[bracket_radius, bracket_radius]);
-
-          translate([0, leg_width - fiberglass_holder_total_width]) {
             square(size=[bracket_radius, bracket_radius]);
-          }
 
-          translate([leg_width * 3 - fiberglass_holder_total_width, leg_width - fiberglass_holder_total_width]) {
-            square(size=[bracket_radius, bracket_radius]);
+            translate([0, leg_width - fiberglass_holder_total_width]) {
+              square(size=[bracket_radius, bracket_radius]);
+            }
+
+            translate([leg_width * 3 - fiberglass_holder_total_width, leg_width - fiberglass_holder_total_width]) {
+              square(size=[bracket_radius, bracket_radius]);
+            }
           }
+        }
+
+        translate([leg_width * 2.5 - fiberglass_holder_total_width / 2, leg_width / 2 - wood_bracket_width, -50]) {
+          cylinder(h=100, r=screw_hole_radius);
         }
       }
     }
