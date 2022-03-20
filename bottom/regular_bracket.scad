@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 use <base_bracket.scad>
 use <fiberglass_panel_holder.scad>
 

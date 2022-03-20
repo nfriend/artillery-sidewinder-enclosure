@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 use <base_bracket_anchor.scad>
 
 // Creates a bracket anchor for a hinge bracket

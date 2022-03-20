@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 
 // Creates the triangle fiberglass panel holder
 module fiberglass_panel_holder() {

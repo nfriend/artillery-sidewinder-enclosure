@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 
 module hinge() {
   hinge_circle_width = hinge_outer_radius - hinge_hole_inner_radius;

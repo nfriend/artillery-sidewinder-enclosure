@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 use <helpers.scad>
 
 // Creates a flat square with rounded edges, with a cone and screw hole cutout

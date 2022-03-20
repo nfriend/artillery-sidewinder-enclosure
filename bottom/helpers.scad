@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 
 // Creates a cone with a spherical top
 module rounded_cone(sphere_radius, end_radius, height) {

@@ -1,4 +1,4 @@
-include <variables.scad>
+include <../variables.scad>
 use <hinge_bracket.scad>
 use <regular_bracket.scad>
 use <regular_bracket_anchor.scad>
