@@ -3,7 +3,7 @@ use <hinge_bracket.scad>
 use <regular_bracket.scad>
 use <regular_bracket_anchor.scad>
 use <hinge_bracket_anchor.scad>
-use <hinge.scad>
+use <../shared/hinge.scad>
 
 // I somehow ended up accidentially modeling everything upside down.
 // This top-level rotation flips everything so it's right-side up.
@@ -54,13 +54,13 @@ rotate(a=[0, 180, 0]) {
 
     translate(v=[0, -85, 0]) {
       rotate(a=[0, 180, 0]) {
-        hinge();
+        hinge(type="bottom");
       }
     }
 
     translate(v=[-15, -30, 0]) {
       rotate(a=[0, 180, 180]) {
-        hinge();
+        hinge(type="bottom");
       }
     }
   }
