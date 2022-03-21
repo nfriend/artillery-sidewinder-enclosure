@@ -3,9 +3,25 @@ include <variables.scad>
 // Creates a bracket with a hinge pole and a fiberglass holder slot
 module hinge_bracket() {
 
+  // The space between the edge of the bracket and the beginning of the
+  // portion that screws to the wood.
+  wood_bracket_offset = hinge_enclosure_radius + hinge_pole_inner_radius;
+
   // Creates the basic structure of the bracket.
   module basic_structure() {
-    cube(size=[leg_width, leg_width, leg_width * 2]);
+    hull() {
+      linear_extrude(height=leg_width * 2, convexity=10) {
+        square(size=[leg_width, 1]);
+
+        translate([leg_width, leg_width - 1, 0]) {
+          square(size=[1, 1]);
+        }
+
+        translate([0 + hinge_pole_inner_radius, leg_width - hinge_pole_inner_radius]) {
+          circle(r=hinge_pole_inner_radius);
+        }
+      }
+    }
 
     translate(v=[leg_width - epsilon, 0, leg_width]) {
       cube(size=[leg_width, leg_width, leg_width]);
@@ -23,17 +39,17 @@ module hinge_bracket() {
           // Create a rectangle with one rounded corner
           linear_extrude(height=wood_bracket_width, convexity=10) {
             hull() {
-              translate([leg_width * 3 - fiberglass_holder_total_width, bracket_radius]) {
+              translate([leg_width * 3 - wood_bracket_offset - bracket_radius, bracket_radius]) {
                 circle(r=bracket_radius);
               }
 
               square(size=[bracket_radius, bracket_radius]);
 
-              translate([0, leg_width - fiberglass_holder_total_width]) {
+              translate([0, leg_width - wood_bracket_offset]) {
                 square(size=[bracket_radius, bracket_radius]);
               }
 
-              translate([leg_width * 3 - fiberglass_holder_total_width, leg_width - fiberglass_holder_total_width]) {
+              translate([leg_width * 3 - wood_bracket_offset - bracket_radius, leg_width - wood_bracket_offset]) {
                 square(size=[bracket_radius, bracket_radius]);
               }
             }
@@ -42,17 +58,17 @@ module hinge_bracket() {
           x_offset = (screw_offset ? -1 : 1) * screw_hole_radius * 2;
 
           // Cut out the screw holes
-          translate([leg_width * 2.5 - fiberglass_holder_total_width / 2 + x_offset, leg_width / 2 - wood_bracket_width / 2, -50]) {
+          translate([leg_width * 2.5 - wood_bracket_offset + x_offset, leg_width / 2 - wood_bracket_width, -50]) {
             cylinder(h=100, r=screw_hole_radius);
           }
         }
       }
 
-      translate(v=[0, fiberglass_holder_total_width, 0]) {
+      translate(v=[0, wood_bracket_offset, 0]) {
         wood_bracket_side();
       }
 
-      translate(v=[0, leg_width, leg_width - (fiberglass_holder_total_width - wood_bracket_width)]) {
+      translate(v=[0, leg_width, leg_width - (wood_bracket_offset - wood_bracket_width)]) {
         rotate(a=[270, 0, 0]) {
           wood_bracket_side(screw_offset=true);
         }
@@ -60,13 +76,13 @@ module hinge_bracket() {
     }
 
     // Bracket for the horizontal beam
-    translate(v=[fiberglass_holder_total_width, -epsilon, leg_width - wood_bracket_width + epsilon]) {
+    translate(v=[wood_bracket_offset, -epsilon, leg_width - wood_bracket_width + epsilon]) {
       wood_bracket();
     }
 
 
     // Bracket for the leg
-    translate([-epsilon, leg_width + wood_bracket_width - epsilon, leg_width * 2 - fiberglass_holder_total_width]) {
+    translate([-epsilon, leg_width + wood_bracket_width - epsilon, leg_width * 2 - wood_bracket_offset]) {
       rotate(a=[90, 90, 0]) {
         wood_bracket();
       }
