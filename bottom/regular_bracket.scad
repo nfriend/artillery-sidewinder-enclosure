@@ -1,6 +1,6 @@
 include <../variables.scad>
 use <base_bracket.scad>
-use <fiberglass_panel_holder.scad>
+use <../shared/fiberglass_panel_holder.scad>
 
 // Creates a regular bracket with two fixed fiberglass panel holders
 module regular_bracket() {

@@ -1,4 +1,5 @@
 include <variables.scad>
+use <../shared/fiberglass_panel_holder.scad>
 
 // Creates a bracket with a hinge pole and a fiberglass holder slot
 module hinge_bracket() {
@@ -106,5 +107,11 @@ module hinge_bracket() {
 
   translate([hinge_pole_inner_radius - epsilon, leg_width - hinge_pole_inner_radius + epsilon, leg_width * 2 - hinge_pole_height + epsilon]) {
     cylinder(h=hinge_pole_height, r=hinge_pole_inner_radius);
+  }
+
+  translate([leg_width - epsilon, fiberglass_holder_total_width / 2 + corner_radius * 2, leg_width - bottom_leg_attachment_clip_height + epsilon]) {
+    rotate([0, 0, 180]) {
+      fiberglass_panel_holder();
+    }
   }
 }

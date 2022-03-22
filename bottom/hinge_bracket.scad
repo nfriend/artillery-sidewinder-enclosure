@@ -1,7 +1,7 @@
 include <../variables.scad>
 use <helpers.scad>
 use <base_bracket.scad>
-use <fiberglass_panel_holder.scad>
+use <../shared/fiberglass_panel_holder.scad>
 
 // Creates a bracket with a hinge pole
 module hinge_bracket() {
