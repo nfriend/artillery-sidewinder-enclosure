@@ -10,12 +10,18 @@ module hinge_bracket() {
 
   // Creates the basic structure of the bracket.
   module basic_structure() {
-    hull() {
-      linear_extrude(height=leg_width * 2, convexity=10) {
-        square(size=[leg_width, 1]);
+    linear_extrude(height=leg_width * 2, convexity=10) {
+      hull() {
+        translate([corner_radius, corner_radius]) {
+          circle(r=corner_radius);
+        }
 
-        translate([leg_width, leg_width - 1, 0]) {
-          square(size=[1, 1]);
+        translate([leg_width - 1, leg_width - 1]) {
+          square(1);
+        }
+
+        translate([leg_width - corner_radius, corner_radius]) {
+          circle(r=corner_radius);
         }
 
         translate([0 + hinge_pole_inner_radius, leg_width - hinge_pole_inner_radius]) {
@@ -24,8 +30,8 @@ module hinge_bracket() {
       }
     }
 
-    translate(v=[leg_width - epsilon, 0, leg_width]) {
-      cube(size=[leg_width, leg_width, leg_width]);
+    translate(v=[leg_width - epsilon - corner_radius, 0, leg_width]) {
+      cube(size=[leg_width + corner_radius, leg_width, leg_width]);
     }
 
     // Creates the bracket that attaches to two sides of the wooden leg
